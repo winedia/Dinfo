@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/labstack/gommon/log"
 	"net/http"
-	"time"
 	"strconv"
+	"time"
+
+	"github.com/labstack/gommon/log"
 )
 
 type commOutput struct {
