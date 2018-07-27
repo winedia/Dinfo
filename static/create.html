@@ -81,7 +81,7 @@
             return unescape(pValue.replace(/&#x/g,'%u').replace(/\\u/g,'%u').replace(/;/g,''));
         }
     };
-    
+
     $(document).ready(function () {
         if (typeof web3 === 'undefined') {
             swal({
@@ -101,21 +101,21 @@
         const MiniToken = contract(abi)
         const miniToken = MiniToken.at(address)
 
-        const currentAddr = web3.eth.accounts[0]
-
-        $("#createTx").click(function () {
-            let info = $("#textarea-info").val()
-            let infoUTF8 = UTFTranslate.Change(info)
-            miniToken.emitEvent(infoUTF8, {from: currentAddr, gasPrice:1000000000})
-            .then(function (txHash) {
-                $.get('/saveTx?txHash=' + txHash + '&txContent=' + info, function (data, status) {
-                    console.log(data, status)
-                    window.location.href="/"
+        eth.accounts().then(function (data) {
+            let currentAddr = data[0]
+            console.log(currentAddr)
+            $("#createTx").click(function () {
+                let info = $("#textarea-info").val()
+                let infoUTF8 = UTFTranslate.Change(info)
+                miniToken.emitEvent(infoUTF8, {from: currentAddr, gasPrice:1000000000})
+                .then(function (txHash) {
+                    $.get('/saveTx?txHash=' + txHash + '&txContent=' + info, function (data, status) {
+                        console.log(data, status)
+                        window.location.href="/"
+                    })
                 })
-            //
-            //
+                .catch(console.error)
             })
-            .catch(console.error)
         })
     })
 </script>
