@@ -13,13 +13,13 @@ You only need a computer and a VPN to use this tool.
 
 #### Step 1: Install MetaMask
 
-Follow the tutorials on [MetaMask](www.metamask.io) to install and create an account on Main Network. Please keep safe of your account.
+Follow the tutorials on [MetaMask](https://metamask.io) to install and create an account on Main Network. Please keep safe of your account.
 
 #### Step 2: Buy or transfer some ETH (for publishers)
 
 Note that if you only want to view messages you don't need to spend any ETH, just skip to next step.
 
-You can either buy some ETH through MetaMask, or transfer some from one of your other Ethereum addresses. If the above methods does not apply, you can buy some from Exchanges like [Huobi](huobi.pro), then draw them out to your MetaMask address. Please refer to their user's guides and do it safely.
+You can either buy some ETH through MetaMask, or transfer some from one of your other Ethereum addresses. If the above methods does not apply, you can buy some from Exchanges like [Huobi](https://huobi.pro), then draw them out to your MetaMask address. Please refer to their user's guides and do it safely.
 
 You can check your ETH balance in MetaMask now.
 
