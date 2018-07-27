@@ -27,7 +27,7 @@ You can check your ETH balance in MetaMask now.
 
 #### Step 3: Download and run
 
-Download the project, choose one binary file among `dinfo/dinfo_*`  according to your Operating System and run it.
+Download the project, choose one binary file among `dinfo/dinfo_*`  according to your Operating System and run it. When binary is running, open your browser and go to `localhost:8089`. Make sure your MetaMask is open when you use the tool.
 
 #### Step 4: Publish
 
@@ -41,7 +41,7 @@ In "Create" page, input your message in the box, then click create button. There
 
 ##### Submit
 
-Normally you do not need to modify any parameters in the window, just press submit button. Note that if your ETH balance is less than estimated transaction fee, the transaction may fail.
+Normally you do not need to modify any parameters in the window, just press submit button. Note that if your ETH balance is less than estimated transaction fee, the transaction may fail. This transaction fee is likely how much you will spend on publishing this message. Again, the ETH you spend goes to miners on Ethereum.
 
 ##### Wait
 After you submit the information, the browser will jump to the "List" page, which shows all of the messages you ever made. The "Pending" column means the transaction is being verified by miners on Ethereum. You can refresh the page to see whether if it's still pending. It may take a few moment (normally several minutes) to let the transaction be accepted by Ethereum. Please stay patient.

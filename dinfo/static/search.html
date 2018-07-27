@@ -103,7 +103,7 @@
         }
 
         const eth = new Eth(web3.currentProvider)
-        const networkTxUrlPrefix = "https://ropsten.etherscan.io/tx/"
+        const networkTxUrlPrefix = "https://etherscan.io/tx/"
 
         let abi = [{"constant":false,"inputs":[{"name":"value","type":"string"}],"name":"emitEvent","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"value","type":"string"}],"name":"Event","type":"event"}]
         abiDecoder.addABI(abi);

@@ -106,7 +106,7 @@
             return false
         }
 
-        const networkTxUrlPrefix = "https://ropsten.etherscan.io/tx/"
+        const networkTxUrlPrefix = "https://etherscan.io/tx/"
         $.get('/txList', function (data, status) {
             data.sort(function (a, b) {
                 return b.create_time - a.create_time;

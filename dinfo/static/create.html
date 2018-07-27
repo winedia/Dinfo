@@ -96,7 +96,7 @@
         const contract = new EthContract(eth)
 
         const abi = [{"constant":false,"inputs":[{"name":"value","type":"string"}],"name":"emitEvent","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"value","type":"string"}],"name":"Event","type":"event"}]
-        const address = '0x15EB253862D0DFfAe7174FB5A28e7078b37c0333'
+        const address = '0x6d105976d1a93e1ce23B825b562519144a56d7a4'
 
         const MiniToken = contract(abi)
         const miniToken = MiniToken.at(address)
