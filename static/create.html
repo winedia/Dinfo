@@ -73,6 +73,15 @@
 <script src="/static/js/ethjs-contract.min.js"></script>
 <script src="/static/js/sweetalert2.all.min.js"></script>
 <script type="text/javascript">
+    var UTFTranslate = {
+        Change:function(pValue){
+            return pValue.replace(/[^\u0000-\u00FF]/g,function($0){return escape($0).replace(/(%u)(\w{4})/gi,"&#x$2;")});
+        },
+        ReChange:function(pValue){
+            return unescape(pValue.replace(/&#x/g,'%u').replace(/\\u/g,'%u').replace(/;/g,''));
+        }
+    };
+    
     $(document).ready(function () {
         if (typeof web3 === 'undefined') {
             swal({
