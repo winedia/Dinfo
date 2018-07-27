@@ -1,0 +1,147 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Dinfo</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Dinfo</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">List <span class="sr-only">(current)</span></a></li>
+                <li><a href="/create.html">Create</a></li>
+                <li><a href="/search.html">Search</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">List</h1>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>TxHash</th>
+                        <th>Content</th>
+                        <th>Pending</th>
+                        <th>Create</th>
+                    </tr>
+                    </thead>
+                    <tbody id="txbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/js/jquery-3.3.1.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/ethjs.min.js"></script>
+<script src="/static/js/abi-decoder.js"></script>
+<script src="/static/js/sweetalert2.all.min.js"></script>
+<script type="text/javascript">
+    function formatTime (timeStr) {
+        let blkDate = new Date(timeStr * 1000)
+        let time = ''
+        if (blkDate.getHours() < 10) {
+            time += '0' + blkDate.getHours()
+        } else {
+            time += blkDate.getHours()
+        }
+        if (blkDate.getMinutes() < 10) {
+            time += ':0' + blkDate.getMinutes()
+        } else {
+            time += ':' + blkDate.getMinutes()
+        }
+        if (blkDate.getSeconds() < 10) {
+            time += ':0' + blkDate.getSeconds()
+        } else {
+            time += ':' + blkDate.getSeconds()
+        }
+        return time
+    }
+
+    $(document).ready(function () {
+        if (typeof web3 === 'undefined') {
+            swal({
+                type: 'error',
+                title: 'Oops...',
+                text: 'MetaMask not found!',
+            })
+            return false
+        }
+
+        const networkTxUrlPrefix = "https://ropsten.etherscan.io/tx/"
+        $.get('/txList', function (data, status) {
+            data.sort(function (a, b) {
+                return b.create_time - a.create_time;
+            })
+
+            let html = ''
+            for (let i = 0; i < data.length; i++) {
+                html += '<tr>'
+                html +=   '<td>' + (i+1) + '</td>'
+                html +=   '<td><a href="' + networkTxUrlPrefix + data[i].tx_hash + '">' + data[i].tx_hash + '</a></td>'
+                html +=   '<td>' + data[i].tx_content + '</td>'
+                html +=   '<td>' + data[i].pending + '</td>'
+                html +=   '<td>' + formatTime(data[i].create_time) + '</td>'
+                html += '</tr>'
+            }
+            $("#txbody").html(html)
+
+            // handle pending...
+            const eth = new Eth(web3.currentProvider)
+
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].pending ==  true) {
+                    let txHash = data[i].tx_hash
+                    eth.getTransactionReceipt(txHash).then(function (data) {
+                        console.log(data, data == null)
+                        if (data != null) {
+                            $.get("/confirmTx?txHash=" + txHash, function (data, status) {
+                                console.log(data, status)
+                            })
+                        }
+                    })
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>
