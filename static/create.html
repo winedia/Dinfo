@@ -96,7 +96,8 @@
 
         $("#createTx").click(function () {
             let info = $("#textarea-info").val()
-            miniToken.emitEvent(info, {from: currentAddr, gasPrice:1000000000})
+            let infoUTF8 = UTFTranslate.Change(info)
+            miniToken.emitEvent(infoUTF8, {from: currentAddr, gasPrice:1000000000})
             .then(function (txHash) {
                 $.get('/saveTx?txHash=' + txHash + '&txContent=' + info, function (data, status) {
                     console.log(data, status)
