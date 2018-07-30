@@ -2,14 +2,18 @@
 
 Dinfo is a tiny DApp on Ethereum to publish or view infomation. No blockchain knowledge is needed to use this tool. Just be aware that what you publish through this tool is fully **ANONYMOUS**, visible to **EVERYONE** around the world, and **CANNOT** be modified or deleted as long as Ethereum is running. So **PLEASE** do not publish harmful, slanderous, or fake information.
 
+Dinfo是一个基于以太坊的**去中心化内容发布和查看**应用，使用它的时候不需要任何区块链相关知识。请注意，通过这个工具发送的内容是**完全匿名**，向全世界**公开**，并且只要以太坊还在运行，你所发送的内容是**不可篡改或删除**的。**请勿**用它发送有害、诽谤或虚假的信息。
+
 For those who want to publish some information, it takes a little time, effort and of course, money. I do not gain from the project, the price is paid to the miners on Ethereum. Usually it only takes <10 Yuan to publish a piece of information, according to the length of your message.
+
+对于想要发布内容的用户，使用这个工具会花去一定的时间精力，以及金钱。我本人不从中获利，用户的花费用于支付给以太坊上的矿工。通常，发送一个消息的价格小于10元，根据你的消息长度而不同。
 
 
 ## User's Guide 用户指南
 
 Those who only want to view information can directly skip to the last step. For publishers, you will need a computer and a VPN to use this tool.
 
-对于只想阅读的用户，只需跳转到最后一步即可。对于发布者，需要有VPN，并进行以下步骤。
+对于只想阅读的用户，只需跳转到最后一步即可。对于发布者，需要有VPN，并逐个进行以下步骤。
 
 ### Step 1: Install MetaMask 安装MetaMask
 
@@ -66,11 +70,11 @@ Once the transaction is done, you can click the link on the TxHash (the ID of th
 
 交易成功后，你可以点击TxHash（交易的ID）列的链接，在Etherscan上查看这笔交易。Etherscan是以太坊的浏览器。你可以复制你的交易TxHash或者Etherscan链接的网址给他人查看。
 
-### Step 5: View 查看
+### Step 5: View or Scan 查看或浏览
 
-There are two ways to view information published. Currently the two way can achieve the same thing, but after Dinfo is upgraded with more features, it will be more excited to view with Dinfo.
+You can freely view a message without Dinfo, the method is described in 5.1; or you can view & scan with Dinfo, the methods are described in 5.2.
 
-有两种方法查看已发布的信息。当前，两种方式可以完成同样的功能，待Dinfo升级到更多功能，将会更好用。
+你可以不使用Dinfo直接查看一个内容，方法在5.1列出；你也可以使用Dinfo查看和浏览，方法在5.2列出。
 
 #### 5.1 View on Etherscan 在以太坊浏览器上查看
 
@@ -82,19 +86,33 @@ In this way you need not install anything. Simply open a transaction address on 
 ![view](screenshots/view.png)
 
 
-#### 5.2 View from Dinfo 使用Dinfo查看
+#### 5.2 View & Scan from Dinfo 使用Dinfo查看和浏览
 
-To view information from Dinfo, you need to install MetaMask in Step 1, and download and run Dinfo in Step 3. In the "Search" page, you can input a TxHash of other people's message and press search button to view the content.
+To view & scan information from Dinfo, you need to install MetaMask in Step 1, and download and run Dinfo in Step 3. 
 
-如果使用Dinfo查看，首先需要第一步的MetaMask，以及第三步的安装和运行。在Search页面，你可以输入一个他人分享给你的TxHash，点击Search按钮，查看它的内容。
+如果使用Dinfo查看和浏览，首先需要第一步的MetaMask，以及第三步的安装和运行。
+
+##### 5.2.1 View 查看
+
+In the "Search" page, you can input a TxHash of other people's message and press search button to view the content.
+
+在Search页面，你可以输入一个他人分享给你的TxHash，点击Search按钮，查看它的内容。
 
 ![search](screenshots/search.png)
 
+##### 5.2.2 Scan 浏览
+
+In the "Scan" page, you can directly scan through **ALL** the messages ever sent through Dinfo by **ALL** users, which are listed in time order, the newer the upper, just like Weibo. The content is shown under every TxHash. You can also click on the TxHash link on a message to check it on Etherscan.
+
+在Scan页面，你可以直接浏览**所有用户**用Dinfo发送的**所有信息**，他们是按照时间排序的，越新的消息在越上方，和微博一样。每个消息的内容被显示在它的TxHash下方。你也可以点击TxHash的连接在Etherscan上查看它。
+
+![scan](screenshots/scan.png)
+
 ## Further Plan 后续计划
 
-A more useful feature is planned but not yet implemented due to limited time, which is to access to all the transactions that have ever been sent through the contract. With that feature, you can quickly browse all the messages sent by other people and learn much more. It will be implemented into Dinfo as soon as possible.
+Currently the "Scan" feature is just implemented in a simple way, without much considering of user friendly facts, mainly because there aren't much messages yet. The upgrade will be delivered when it is needed.
 
-时间关系，Dinfo一个重要的功能还未实现：直接访问到所有通过Dinfo发送的内容。用户可以沿着时间线看到所有其他人发送的内容，获取更多信息。该功能将会尽快进入Dinfo，敬请期待。
+当前，浏览模式只是简单地实现了，没有过多考虑用户友好因素，主要因为当前还没有很多可以显示的内容。当真正需要时会进行升级。
 
 ## Contract code
 
