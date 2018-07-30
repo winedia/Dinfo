@@ -17,6 +17,13 @@
 
     <!-- Custom styles for this template -->
     <link href="/static/css/dashboard.css" rel="stylesheet">
+    <style type="text/css">
+        pre {
+            background-color: white;
+            border: none;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 
 <body>
@@ -40,27 +47,15 @@
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a href="/">List</a></li>
-                <li class="active"><a href="#">Create <span class="sr-only">(current)</span></a></li>
+                <li><a href="/create.html">Create</a></li>
                 <li><a href="/search.html">Search</a></li>
-                <li><a href="/scan.html">Scan</a></li>
+                <li class="active"><a href="#">Scan <span class="sr-only">(current)</span></a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Create</h1>
-
-
-            <form class="form-horizontal">
-                <div class="form-group">
-                    <div class="col-sm-offset-1 col-sm-10">
-                        <textarea class="form-control" rows="5" id="textarea-info" placeholder="write your message..."></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-1 col-sm-10">
-                        <button type="button" id="createTx" class="btn btn-default">Create</button>
-                    </div>
-                </div>
-            </form>
+            <h1 class="page-header">Scan</h1>
+            <div id="msgList"><h4>Fetching...</h4></div>
+            <button type="button" id="refreshBtn" class="btn btn-default">Refresh</button>
         </div>
     </div>
 </div>
@@ -95,29 +90,40 @@
 
         const eth = new Eth(web3.currentProvider)
         const contract = new EthContract(eth)
+        const networkTxUrlPrefix = "https://etherscan.io/tx/"
 
         const abi = [{"constant":false,"inputs":[{"name":"value","type":"string"}],"name":"emitEvent","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":false,"name":"value","type":"string"}],"name":"Event","type":"event"}]
         const address = '0x6d105976d1a93e1ce23B825b562519144a56d7a4'
 
-        const MiniToken = contract(abi)
-        const miniToken = MiniToken.at(address)
+        var MyContract = web3.eth.contract(abi);
+        var myContractInstance = MyContract.at(address);
 
-        eth.accounts().then(function (data) {
-            let currentAddr = data[0]
-            console.log(currentAddr)
-            $("#createTx").click(function () {
-                let info = $("#textarea-info").val()
-                let infoUTF8 = UTFTranslate.Change(info)
-                miniToken.emitEvent(infoUTF8, {from: currentAddr, gasPrice:1000000000})
-                .then(function (txHash) {
-                    $.get('/saveTx?txHash=' + txHash + '&txContent=' + info, function (data, status) {
-                        console.log(data, status)
-                        window.location.href="/"
-                    })
-                })
-                .catch(console.error)
+        var events = myContractInstance.allEvents({fromBlock: 6039288, toBlock: 'latest'})
+
+        var getEvents = function() {
+            events.get(function(error, logs) {
+                $('#msgList').html('')
+                for (index in logs) {
+                    var html = '<div class="panel panel-default">'
+                    html += '<div class="panel-heading"> TxHash: ' 
+                    txHash = logs[index].transactionHash
+                    html += '<a href = "'+ networkTxUrlPrefix + txHash + '">' + txHash + '</a></div>'
+                    html += '<div class="panel-body"><pre>'
+                    html += logs[index].args.value
+                    html += '</pre></div></div>'
+                    $('#msgList').prepend(html)
+                }
             })
-        })
+        }
+
+
+        $('#refreshBtn').click(function() {
+            $('#msgList').html('<h4>Fetching....</h4>')
+            getEvents()
+        });
+
+        getEvents()
+
     })
 </script>
 </body>

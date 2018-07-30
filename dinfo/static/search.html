@@ -17,6 +17,13 @@
 
     <!-- Custom styles for this template -->
     <link href="/static/css/dashboard.css" rel="stylesheet">
+    <style type="text/css">
+        pre {
+            background-color: white;
+            border: none;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,6 +49,7 @@
                 <li><a href="/">List</a></li>
                 <li><a href="/create.html">Create</a></li>
                 <li class="active"><a href="/create.html">Search <span class="sr-only">(current)</span></a></li>
+                <li><a href="/scan.html">Scan</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -118,7 +126,7 @@
                 let html = '<div class="panel panel-default">'
                 html +=      '<div class="panel-body">'
                 html +=        '<p><b>TxHash:</b> <a href="' + networkTxUrlPrefix + txHash + '">' + txHash + '</a></p>'
-                html +=        '<p><b>Content:</b> ' + inputData + '</p>'
+                html +=        '<p><pre><b>Content:</b> ' + inputData + '</p></pre>'
                 html +=      '</div>'
                 html +=    '</div>'
 
